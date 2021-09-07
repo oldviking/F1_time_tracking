@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using F1_time_tracking.Data;
+using System.Security.Cryptography;
+using F1_time_tracking.Models;
 
 namespace F1_time_tracking
 {
@@ -30,15 +32,54 @@ namespace F1_time_tracking
             this.context = context;
         }
 
-        public string PasswordHasher(string Password)
-        {
-            string result = Convert.ToBase64String(KeyDerivation)
-        }
+        
         
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            User user = context.Users.FirstOrDefault(us => us.username == Username.Text);
+            if(user != null)
+            {
+                PasswordFunctions pwfunctions = new();
+                string hash = pwfunctions.PasswordHasher(Password: Password.Password, salt: user.salt);
+                if (pwfunctions.verifyHashes(DbHash: user.password, InputHash: hash))
+                {
+                    Overview overview = new();
+                    this.NavigationService.Navigate(overview);
 
+                }
+                else
+                {
+                    MessageBox.Show("Wrong Password!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No User with the Username "+ Username.Text + "!");
+            }
+
+
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordFunctions pwfunctions = new();
+            User dbUseer = context.Users.FirstOrDefault(us => us.username == Username.Text);
+            if (dbUseer != null)
+            {
+                User user = new();
+                user.username = Username.Text;
+                user.salt = pwfunctions.SaltGenerator();
+                user.password = pwfunctions.PasswordHasher(Password: Password.Password, user.salt);
+                context.Users.Add(user);
+                context.SaveChanges();
+
+                MessageBox.Show("User Created!");
+            }
+            else
+            {
+                MessageBox.Show("User exists already!");
+            }
         }
     }
 }
