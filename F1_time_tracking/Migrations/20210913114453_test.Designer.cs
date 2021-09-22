@@ -4,14 +4,16 @@ using F1_time_tracking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace F1_time_tracking.Migrations
 {
     [DbContext(typeof(F1Context))]
-    partial class F1ContextModelSnapshot : ModelSnapshot
+    [Migration("20210913114453_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,6 +56,9 @@ namespace F1_time_tracking.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SeasionId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("SeasonId")
                         .HasColumnType("int");

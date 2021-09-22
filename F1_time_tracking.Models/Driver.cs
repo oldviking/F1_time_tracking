@@ -8,11 +8,10 @@ namespace F1_time_tracking.Models
 {
     public class Driver
     {
-        public int DriverID { get; set; }
-        public string Name { get; set; }
-
-        public int TeamID { get; set; }
-
-        public ICollection<Team> Teams { get; set; }
+        public int Id { get; set; }
+        public int TeamId { get; set; }
+        public virtual Team Team { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

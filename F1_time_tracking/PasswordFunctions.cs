@@ -12,13 +12,14 @@ namespace F1_time_tracking
         public string PasswordHasher(string Password, string salt)
         {
             int Hasing_interations = 1000;
-            // in Production the Argn2 Crythographie would be implemented, because we have no internet connection the library can't be installed. And a pepper w
+            // in Production the Argn2 Crythographie would be implemented, because we have no internet connection the library can't be installed. And a pepper
+            // The SHA Algorythmus is not so secure against very fast gpu cores
             SHA512 sha256Hash = SHA512.Create();
             HashAlgorithm hashAlgorithm = sha256Hash;
             string PasswordWithHash = Password + salt;
 
             string result = null;
-            for(int i = Hasing_interations; i >= 0; i-- )
+            for(int i = Hasing_interations; i >= 0; i--)
             {
                 
                 result = Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(PasswordWithHash)));

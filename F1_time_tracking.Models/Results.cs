@@ -8,11 +8,11 @@ namespace F1_time_tracking.Models
 {
     public class Results
     {
-        public int ID { get; set; }
-        public int RaceID { get; set; }
+        public int Id { get; set; }
         public int Position { get; set; }
-        public Race Race { get; set; }
+        public int RaceId { get; set; }
+        public virtual Race Race { get; set; }
         public int DriverId { get; set; }
-        public Driver Driver { get; set; }
+        public virtual Driver Driver { get; set; }
     }
 }

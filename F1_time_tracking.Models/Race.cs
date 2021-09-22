@@ -8,11 +8,10 @@ namespace F1_time_tracking.Models
 {
     public class Race
     {
-        public int RaceID { get; set; }
+        public int Id { get; set; }
+        public Season Season { get; set; }
         public string Name { get; set; }
-        public DateTime Racedatet { get; set; }
-        public int SeasionId { get; set; }
-        public virtual Season Season { get; set; }
+        public DateTime Date { get; set; }
         public virtual List<Results> Results { get; set; }
     }
 }

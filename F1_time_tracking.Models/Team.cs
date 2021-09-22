@@ -9,9 +9,8 @@ namespace F1_time_tracking.Models
 {
     public class Team
     {
-        public int TeamID { get; set; }
+        public int Id { get; set; }
         public int Name { get; set; }
-
-        public ICollection<Driver> Driver { get; set; } = new ObservableCollection<Driver>();
+        public virtual ICollection<Driver> Drivers { get; set; } = new ObservableCollection<Driver>();
     }
 }
