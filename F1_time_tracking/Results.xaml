@@ -15,10 +15,12 @@
     </Page.Resources>
     <Grid>
         <Grid>
-            <Label x:Name="Label1" Content="Rennen" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28"/>
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="0,47,0,32" Width="780"
+            <Label x:Name="Label1" Content="Rennen" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" Margin="0,175,0,0" Height="45"/>
+            <DataGrid x:Name="dataGrid" HorizontalAlignment="Center" Margin="0,220,0,40" Width="780"
                       ItemsSource="{Binding Source={StaticResource raceViewSource}}" />
             <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="721,373,0,0" VerticalAlignment="Top"/>
+            <DataGrid x:Name="dataGrid1" Margin="10,37,10,212" ItemsSource="{Binding Source={StaticResource seasonViewSource}}"/>
         </Grid>
+        <Label x:Name="Label1_Copy" Content="Saison" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" Height="43" Width="222"/>
     </Grid>
 </Page>
