@@ -14,7 +14,7 @@
         <Label x:Name="label" Content="Username" HorizontalAlignment="Left" Margin="330,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.102,0.024"/>
         <Label x:Name="label1" Content="Passwort" HorizontalAlignment="Left" Margin="330,194,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="Login" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Width="70" Click="button_Click"/>
-        <Button x:Name="button1" Content="x" HorizontalAlignment="Left" Margin="365,315,0,0" RenderTransformOrigin="-0.078,-0.406" Width="64"  Click="button1_Click" Height="17" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Button x:Name="button1" Content="" HorizontalAlignment="Left" Margin="371,310,0,0" RenderTransformOrigin="-0.078,-0.406" Width="64"  Click="button1_Click" Height="17" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
 
     </Grid>
 </Page>

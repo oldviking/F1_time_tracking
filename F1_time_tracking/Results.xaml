@@ -14,13 +14,70 @@
         <CollectionViewSource x:Key="driversViewSource" />
     </Page.Resources>
     <Grid>
-        <Grid>
-            <Label x:Name="Label1" Content="Rennen" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" Margin="0,175,0,0" Height="45"/>
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Center" Margin="0,220,0,40" Width="780"
-                      ItemsSource="{Binding Source={StaticResource raceViewSource}}" />
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="721,373,0,0" VerticalAlignment="Top"/>
-            <DataGrid x:Name="dataGrid1" Margin="10,37,10,212" ItemsSource="{Binding Source={StaticResource seasonViewSource}}"/>
-        </Grid>
-        <Label x:Name="Label1_Copy" Content="Saison" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" Height="43" Width="222"/>
+
+
+        <Button x:Name="button" Content="&lt;" HorizontalAlignment="Left" Margin="368,145,0,0" 
+                VerticalAlignment="Top" RenderTransformOrigin="0.562,0.616"/>
+        
+        <Label x:Name="label" Content="Saison" HorizontalAlignment="Left" Margin="3,3,0,0" 
+               VerticalAlignment="Top" FontSize="16"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="59,7,0,0" VerticalAlignment="Top" 
+                  Width="120"/>
+        
+        <Label x:Name="label1" Content="Rennen" HorizontalAlignment="Left" Margin="227,2,0,0" 
+               VerticalAlignment="Top" FontSize="16"/>
+        
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="290,7,0,0" VerticalAlignment="Top" 
+                  Width="120"/>
+
+        <DataGrid x:Name="dataGrid" Margin="10,73,463,10" AutoGenerateColumns="False" 
+          EnableRowVirtualization="True" CanUserAddRows="False"
+          ItemsSource="{Binding Source={StaticResource resultsViewSource}}">
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn Binding="{Binding Position}" 
+                    Header="Position" Width="SizeToHeader"
+                    IsReadOnly="True"/>
+
+                <DataGridTextColumn Binding="{Binding Driver.FirstName}" Header="First Name" 
+                    Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Driver.LastName}" Header="Last Name" 
+                    Width="*" IsReadOnly="True"/>
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button IsEnabled="{Binding UpEnabled}" Click="MoveUp" Margin="2, 0, 0, 0">Up</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="MoveDown" Margin="2, 0, 0, 0">Down</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns> 
+        </DataGrid>
+
+        <Label x:Name="label2" Content="Ergebniss" HorizontalAlignment="Left" Margin="10,39,0,0" 
+               VerticalAlignment="Top" FontSize="18"/>
+        <DataGrid x:Name="dataGrid1" Margin="445,73,10,10" AutoGenerateColumns="False" 
+            EnableRowVirtualization="True" CanUserAddRows="False" CanUserDeleteRows="False"
+            ItemsSource="{Binding Source={StaticResource driversViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding FirstName}" 
+                            Header="First Name" Width="SizeToHeader"
+                            IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" 
+                            Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Team.Name}" Header="Team" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
     </Grid>
 </Page>

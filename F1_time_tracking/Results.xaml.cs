@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using F1_time_tracking.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace F1_time_tracking
 {
@@ -35,9 +36,40 @@ namespace F1_time_tracking
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            f1Context.Races.Load();
+            f1Context.Seasons.Load();
+            f1Context.Drivers.Load();
             raceViewSource.Source = f1Context.Races.Local.ToObservableCollection();
             seasonViewSource.Source = f1Context.Seasons.Local.ToObservableCollection();
             driversViewSource.Source = f1Context.Drivers.Local.ToObservableCollection();
+        }
+
+        private void MoveDown(object sender, RoutedEventArgs e)
+        {
+            int idx = ((Models.Race)comboBox1.SelectedItem).Results.IndexOf((Models.Results)dataGrid.SelectedItem);
+            if (idx > 0)
+            {
+                ((Models.Race)comboBox1.SelectedItem).Results.Remove((Models.Results)dataGrid.SelectedItem);
+                ((Models.Race)comboBox1.SelectedItem).Results.Insert(idx - 1, (Models.Results)dataGrid.SelectedItem);
+                dataGrid.Items.Refresh();
+                recalculatePosition();
+                dataGrid.SelectedIndex--;
+
+            }
+        }
+
+            private void MoveUp(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void recalculatePosition()
+        {
+            foreach (Models.Results r in ((Models.Race)comboBox1.SelectedItem).Results)
+            {
+                r.Position = ((Models.Race)comboBox1.SelectedItem).Results.IndexOf(r) + 1;
+            }
+            dataGrid.Items.Refresh();
         }
     }
 }
