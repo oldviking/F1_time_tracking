@@ -5,79 +5,56 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:F1_time_tracking"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="800"
+      d:DesignHeight="420" d:DesignWidth="800"
       Title="Results" Loaded="Page_Loaded">
     <Page.Resources>
         <CollectionViewSource x:Key="seasonViewSource" />
         <CollectionViewSource x:Key="raceViewSource" Source="{Binding Races, Source={StaticResource seasonViewSource}}" />
-        <CollectionViewSource x:Key="resultsViewSource" Source="{Binding Results, Source={StaticResource raceViewSource}}" />
-        <CollectionViewSource x:Key="driversViewSource" />
+        <CollectionViewSource x:Key="resultsViewSource" Source="{Binding Result, Source={StaticResource raceViewSource}}"/>
+
     </Page.Resources>
     <Grid>
 
-
-        <Button x:Name="button" Content="&lt;" HorizontalAlignment="Left" Margin="368,145,0,0" 
-                VerticalAlignment="Top" RenderTransformOrigin="0.562,0.616"/>
-        
         <Label x:Name="label" Content="Saison" HorizontalAlignment="Left" Margin="3,3,0,0" 
                VerticalAlignment="Top" FontSize="16"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="59,7,0,0" VerticalAlignment="Top" 
-                  Width="120"/>
-        
+                  Width="120" SelectionChanged="comboBox_SelectionChanged"
+                  ItemsSource="{Binding Source={StaticResource seasonViewSource}}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Id"/>
+
         <Label x:Name="label1" Content="Rennen" HorizontalAlignment="Left" Margin="227,2,0,0" 
                VerticalAlignment="Top" FontSize="16"/>
-        
+
         <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="290,7,0,0" VerticalAlignment="Top" 
-                  Width="120"/>
-
-        <DataGrid x:Name="dataGrid" Margin="10,73,463,10" AutoGenerateColumns="False" 
-          EnableRowVirtualization="True" CanUserAddRows="False"
-          ItemsSource="{Binding Source={StaticResource resultsViewSource}}">
-            <DataGrid.Columns>
-                
-                <DataGridTextColumn Binding="{Binding Position}" 
-                    Header="Position" Width="SizeToHeader"
-                    IsReadOnly="True"/>
-
-                <DataGridTextColumn Binding="{Binding Driver.FirstName}" Header="First Name" 
-                    Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Driver.LastName}" Header="Last Name" 
-                    Width="*" IsReadOnly="True"/>
-                
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button IsEnabled="{Binding UpEnabled}" Click="MoveUp" Margin="2, 0, 0, 0">Up</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="MoveDown" Margin="2, 0, 0, 0">Down</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-            </DataGrid.Columns> 
-        </DataGrid>
+                  Width="120"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Id" SelectionChanged="comboBox1_SelectionChanged">
+        </ComboBox>
 
         <Label x:Name="label2" Content="Ergebniss" HorizontalAlignment="Left" Margin="10,39,0,0" 
                VerticalAlignment="Top" FontSize="18"/>
-        <DataGrid x:Name="dataGrid1" Margin="445,73,10,10" AutoGenerateColumns="False" 
+        <DataGrid x:Name="dataGrid1" Margin="10,73,10,37" AutoGenerateColumns="False" 
             EnableRowVirtualization="True" CanUserAddRows="False" CanUserDeleteRows="False"
-            ItemsSource="{Binding Source={StaticResource driversViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected">
+            RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding FirstName}" 
-                            Header="First Name" Width="SizeToHeader"
+                <DataGridTextColumn Binding="{Binding Position}" 
+                            Header="Position" Width="SizeToHeader"
                             IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" 
+                <DataGridTextColumn Binding="{Binding Points}" Header="Punke" 
                             Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Team.Name}" Header="Team" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Driver.Team.Name}" Header="Team" 
+                            Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Driver.FirstName}" Header="Vorname" 
+                            Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Driver.LastName}" Header="Nachname" 
+                            Width="SizeToHeader" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Button Name="Add" Content="Hinzufügen" Margin="10,0,0,6" Click="Add_Click" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="114"></Button>
+        <Button x:Name="button" Content="Bearbeiten" HorizontalAlignment="Left" Margin="128,0,0,6" VerticalAlignment="Bottom" Height="27" Width="114"/>
+        <Button x:Name="button1" Content="Löschen" HorizontalAlignment="Left" Margin="247,0,0,6" VerticalAlignment="Bottom" Width="115" Height="27"/>
+        <Button x:Name="button2" Content="Neuladen" Margin="0,0,10,5" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="117" Click="button2_Click"/>
 
     </Grid>
 </Page>

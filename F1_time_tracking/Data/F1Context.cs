@@ -18,6 +18,8 @@ namespace F1_time_tracking.Data
         public DbSet<Models.Results> Result { get; set; }
         public DbSet<Driver> Drivers { get; set; }
 
+        public DbSet<DriverTeam> driverTeams { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=localhost;Initial Catalog=Formel1;Trusted_Connection=True;MultipleActiveResultSets=true");
@@ -25,7 +27,23 @@ namespace F1_time_tracking.Data
             base.OnConfiguring(optionsBuilder);
         }
 
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Driver>().HasMany(x => x.Team)
+                    .WithMany(x => x.Drivers)
+                    .UsingEntity<DriverTeam>(
+                        x => x.HasOne(x => x.Team)
+                        .WithMany().HasForeignKey(x => x.TeamID),
+                        x => x.HasOne(x => x.Driver)
+                       .WithMany().HasForeignKey(x => x.DriverID),
+                        x => x.HasOne(x => x.Season)
+                        .WithMany().HasForeignKey(x => x.SeasonID));
+
+            modelBuilder.Entity<Models.Results>().HasKey(pk => new { pk.RaceId, pk.Position });
+        }
+
+
 
     }
 }

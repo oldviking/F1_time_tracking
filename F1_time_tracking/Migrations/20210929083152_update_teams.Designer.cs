@@ -4,14 +4,16 @@ using F1_time_tracking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace F1_time_tracking.Migrations
 {
     [DbContext(typeof(F1Context))]
-    partial class F1ContextModelSnapshot : ModelSnapshot
+    [Migration("20210929083152_update_teams")]
+    partial class update_teams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,27 +39,9 @@ namespace F1_time_tracking.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TeamId");
+
                     b.ToTable("Drivers");
-                });
-
-            modelBuilder.Entity("F1_time_tracking.Models.DriverTeam", b =>
-                {
-                    b.Property<int>("DriverID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeasonID")
-                        .HasColumnType("int");
-
-                    b.HasKey("DriverID", "TeamID");
-
-                    b.HasIndex("SeasonID");
-
-                    b.HasIndex("TeamID");
-
-                    b.ToTable("driverTeams");
                 });
 
             modelBuilder.Entity("F1_time_tracking.Models.Race", b =>
@@ -91,9 +75,6 @@ namespace F1_time_tracking.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DriverId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Points")
                         .HasColumnType("int");
 
                     b.Property<int>("Position")
@@ -158,29 +139,13 @@ namespace F1_time_tracking.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("F1_time_tracking.Models.DriverTeam", b =>
+            modelBuilder.Entity("F1_time_tracking.Models.Driver", b =>
                 {
-                    b.HasOne("F1_time_tracking.Models.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("F1_time_tracking.Models.Season", "Season")
-                        .WithMany()
-                        .HasForeignKey("SeasonID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("F1_time_tracking.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamID")
+                        .WithMany("Drivers")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Season");
 
                     b.Navigation("Team");
                 });
@@ -221,6 +186,11 @@ namespace F1_time_tracking.Migrations
             modelBuilder.Entity("F1_time_tracking.Models.Season", b =>
                 {
                     b.Navigation("Races");
+                });
+
+            modelBuilder.Entity("F1_time_tracking.Models.Team", b =>
+                {
+                    b.Navigation("Drivers");
                 });
 #pragma warning restore 612, 618
         }

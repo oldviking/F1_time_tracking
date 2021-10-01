@@ -10,8 +10,10 @@ namespace F1_time_tracking.Models
     {
         public int Id { get; set; }
         public int TeamId { get; set; }
-        public virtual Team Team { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public ICollection<Models.Team> Team { get; set; }
+        public string Name { get { return FirstName + " "+ LastName; } }
     }
 }

@@ -4,14 +4,16 @@ using F1_time_tracking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace F1_time_tracking.Migrations
 {
     [DbContext(typeof(F1Context))]
-    partial class F1ContextModelSnapshot : ModelSnapshot
+    [Migration("20210930092340_test23")]
+    partial class test23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +93,6 @@ namespace F1_time_tracking.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DriverId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Points")
                         .HasColumnType("int");
 
                     b.Property<int>("Position")

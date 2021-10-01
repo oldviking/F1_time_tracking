@@ -4,20 +4,37 @@ using F1_time_tracking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace F1_time_tracking.Migrations
 {
     [DbContext(typeof(F1Context))]
-    partial class F1ContextModelSnapshot : ModelSnapshot
+    [Migration("20210930085828_ntom_Driver_Team")]
+    partial class ntom_Driver_Team
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("DriverTeam", b =>
+                {
+                    b.Property<int>("DriversId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DriversId", "TeamId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("DriverTeam");
+                });
 
             modelBuilder.Entity("F1_time_tracking.Models.Driver", b =>
                 {
@@ -38,26 +55,6 @@ namespace F1_time_tracking.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Drivers");
-                });
-
-            modelBuilder.Entity("F1_time_tracking.Models.DriverTeam", b =>
-                {
-                    b.Property<int>("DriverID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeasonID")
-                        .HasColumnType("int");
-
-                    b.HasKey("DriverID", "TeamID");
-
-                    b.HasIndex("SeasonID");
-
-                    b.HasIndex("TeamID");
-
-                    b.ToTable("driverTeams");
                 });
 
             modelBuilder.Entity("F1_time_tracking.Models.Race", b =>
@@ -91,9 +88,6 @@ namespace F1_time_tracking.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DriverId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Points")
                         .HasColumnType("int");
 
                     b.Property<int>("Position")
@@ -158,31 +152,19 @@ namespace F1_time_tracking.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("F1_time_tracking.Models.DriverTeam", b =>
+            modelBuilder.Entity("DriverTeam", b =>
                 {
-                    b.HasOne("F1_time_tracking.Models.Driver", "Driver")
+                    b.HasOne("F1_time_tracking.Models.Driver", null)
                         .WithMany()
-                        .HasForeignKey("DriverID")
+                        .HasForeignKey("DriversId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("F1_time_tracking.Models.Season", "Season")
+                    b.HasOne("F1_time_tracking.Models.Team", null)
                         .WithMany()
-                        .HasForeignKey("SeasonID")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("F1_time_tracking.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Season");
-
-                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("F1_time_tracking.Models.Race", b =>

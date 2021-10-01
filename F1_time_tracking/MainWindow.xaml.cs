@@ -24,7 +24,12 @@ namespace F1_time_tracking
         public MainWindow()
         {
             InitializeComponent();
+            //TODO: REmove before presenting the app
+#if DEBUG
+            MainFrame.Content = new Overview();
+#else
             MainFrame.Content = new Login();
+#endif
         }
 
 
