@@ -41,8 +41,6 @@
                 <DataGridTextColumn Binding="{Binding Position}" 
                             Header="Position" Width="SizeToHeader"
                             IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Points}" Header="Punke" 
-                            Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Driver.Team.Name}" Header="Team" 
                             Width="SizeToHeader" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Driver.FirstName}" Header="Vorname" 
@@ -52,8 +50,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Name="Add" Content="Hinzufügen" Margin="10,0,0,6" Click="Add_Click" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="114"></Button>
-        <Button x:Name="button" Content="Bearbeiten" HorizontalAlignment="Left" Margin="128,0,0,6" VerticalAlignment="Bottom" Height="27" Width="114"/>
-        <Button x:Name="button1" Content="Löschen" HorizontalAlignment="Left" Margin="247,0,0,6" VerticalAlignment="Bottom" Width="115" Height="27"/>
+        <Button x:Name="edit_btn" Content="Bearbeiten" HorizontalAlignment="Left" Margin="128,0,0,6" VerticalAlignment="Bottom" Height="27" Width="114" Click="edit_btn_Click"/>
+        <Button x:Name="delete_btn" Content="Löschen" HorizontalAlignment="Left" Margin="247,0,0,6" VerticalAlignment="Bottom" Width="115" Height="27" Click="delete_btn_Click"/>
         <Button x:Name="button2" Content="Neuladen" Margin="0,0,10,5" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="117" Click="button2_Click"/>
 
     </Grid>

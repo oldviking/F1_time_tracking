@@ -66,14 +66,34 @@ namespace F1_time_tracking
 
         private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ResultViewSource.Source = f1Context.Result.Local.ToObservableCollection().Where(x => x.RaceId == ((Models.Race)comboBox1.SelectedItem).Id);
-
 
             if(comboBox1.SelectedItem != null)
-            dataGrid1.ItemsSource = f1Context.Result.Local.Where(x => x.RaceId == ((Models.Race)comboBox1.SelectedItem).Id).ToList();
+            dataGrid1.ItemsSource = f1Context.Result.Where(x => x.RaceId == ((Models.Race)comboBox1.SelectedItem).Id).Include(y => y.Driver.Team)
+                    .ToList();
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            refresh();
+
+        }
+
+        private void edit_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if ((Models.Results)dataGrid1.SelectedItem != null)
+            {
+                edit edit = new(((Models.Results)dataGrid1.SelectedItem).RaceId, ((Models.Results)dataGrid1.SelectedItem).Position);
+                dataGrid1.ItemsSource = null;
+                Nullable<bool> dialogResult = edit.ShowDialog();
+
+                if(dialogResult == false)
+                refresh();
+            }
+            
+           
+        }
+
+        private void refresh()
         {
             f1Context.Races.Load();
             f1Context.Seasons.Load();
@@ -81,10 +101,22 @@ namespace F1_time_tracking
             f1Context.Teams.Load();
             f1Context.Result.Load();
 
-            
-
+            if (comboBox1.SelectedItem != null)
+                dataGrid1.ItemsSource = f1Context.Result.Where(x => x.RaceId == ((Models.Race)comboBox1.SelectedItem).Id).ToList();
         }
 
-        
+        private void delete_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if((Models.Results)dataGrid1.SelectedItem != null)
+            {
+                f1Context.Result.Remove((Models.Results)dataGrid1.SelectedItem);
+                f1Context.SaveChanges();
+
+                if (comboBox1.SelectedItem != null)
+                    dataGrid1.ItemsSource = f1Context.Result.Where(x => x.RaceId == ((Models.Race)comboBox1.SelectedItem).Id).ToList();
+            }
+                
+            
+        }
     }
 }

@@ -40,7 +40,6 @@ namespace F1_time_tracking.Data
                         x => x.HasOne(x => x.Season)
                         .WithMany().HasForeignKey(x => x.SeasonID));
 
-            modelBuilder.Entity<Models.Results>().HasKey(pk => new { pk.RaceId, pk.Position });
         }
 
 
