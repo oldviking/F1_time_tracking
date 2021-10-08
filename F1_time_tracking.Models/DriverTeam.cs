@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace F1_time_tracking.Models
+﻿namespace F1_time_tracking.Models
 {
     public class DriverTeam
     {
@@ -14,6 +8,5 @@ namespace F1_time_tracking.Models
         public Driver Driver { get; private set; }
         public Team Team { get; private set; }
         public Season Season { get; private set; }
-
     }
 }

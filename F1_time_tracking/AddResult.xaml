@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="Add Result" Height="142" Width="300" Loaded="OnLoad">
     <Grid Height="120" VerticalAlignment="Top">
-        <Button x:Name="Addbutton" Content="Hinzufügen" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Click="Addbutton_Click"/>
-        <ComboBox x:Name="comboBox"  HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="120"                   
+        <Button x:Name="Addbutton" Content="Hinzufügen" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Click="Addbutton_Click" />
+        <ComboBox x:Name="comboBox"  HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="120"
                   DisplayMemberPath="Driver.Name"
-                  SelectedValuePath="Driver.Id"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Center" Margin="0,62,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label" Content="Fahrer" HorizontalAlignment="Left" Margin="42,18,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Platz" HorizontalAlignment="Left" Margin="42,58,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="0" Margin="376,404,0,0" VerticalAlignment="Top" Width="0"/>
+                  SelectedValuePath="Driver.Id" />
+        <TextBox x:Name="textBox" HorizontalAlignment="Center" Margin="0,62,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label x:Name="label" Content="Fahrer" HorizontalAlignment="Left" Margin="42,18,0,0" VerticalAlignment="Top" />
+        <Label x:Name="label1" Content="Platz" HorizontalAlignment="Left" Margin="42,58,0,0" VerticalAlignment="Top" />
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="0" Margin="376,404,0,0" VerticalAlignment="Top" Width="0" />
     </Grid>
 </Window>

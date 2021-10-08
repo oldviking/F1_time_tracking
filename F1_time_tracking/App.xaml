@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:F1_time_tracking"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

@@ -7,12 +7,11 @@
         mc:Ignorable="d"
         Title="edit" Height="200" Width="300" Loaded="OnLoad">
     <Grid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="105,34,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="105,66,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="button" Content="Ändern" HorizontalAlignment="Left" Margin="83,121,0,0" VerticalAlignment="Top" Width="61" Click="button_Click"/>
-        <Button x:Name="button1" Content="Abbrechen" HorizontalAlignment="Left" Margin="150,121,0,0" VerticalAlignment="Top" Click="button1_Click"/>
-        <Label x:Name="label" Content="Fahrer:" HorizontalAlignment="Left" Margin="45,30,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Platz:" HorizontalAlignment="Left" Margin="49,62,0,0" VerticalAlignment="Top"/>
-
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="105,34,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" />
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="105,66,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Button x:Name="button" Content="Ändern" HorizontalAlignment="Left" Margin="83,121,0,0" VerticalAlignment="Top" Width="61" Click="button_Click" />
+        <Button x:Name="button1" Content="Abbrechen" HorizontalAlignment="Left" Margin="150,121,0,0" VerticalAlignment="Top" Click="button1_Click" />
+        <Label x:Name="label" Content="Fahrer:" HorizontalAlignment="Left" Margin="45,30,0,0" VerticalAlignment="Top" />
+        <Label x:Name="label1" Content="Platz:" HorizontalAlignment="Left" Margin="49,62,0,0" VerticalAlignment="Top" />
     </Grid>
 </Window>
